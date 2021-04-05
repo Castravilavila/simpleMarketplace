@@ -16,4 +16,8 @@ public interface UserService {
 //    ResponseEntity<Object> updateUser(UserDto userDto, Long id);
 
     ResponseEntity<Object> deleteUser(Long id);
+
+    boolean checkEmailAvailability(String email);
+
+    boolean checkUsernameAvailability(String username);
 }

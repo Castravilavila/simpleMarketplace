@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,9 +22,8 @@ public class Product {
     private String description;
     private String price;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    @ManyToMany(mappedBy = "products")
+    private Set<User> users= new HashSet<>();
 
     @Override
     public boolean equals(Object product){

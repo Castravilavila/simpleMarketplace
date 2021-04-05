@@ -27,15 +27,15 @@ public class UserController {
         return userService.findUserById(userId);
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<Object> createUser(@RequestBody UserDto userDto){
-        return userService.createUser(userDto);
+    @PostMapping("/users/checkEmail")
+    public boolean checkEmailAvailability(@RequestParam String email){
+        return userService.checkEmailAvailability(email);
     }
 
-//    @PostMapping("user/update")
-//    public ResponseEntity<Object> updateUser(@RequestBody UserDto userDto){
-//
-//    }
+    @PostMapping("/users/checkUsername")
+    public boolean checkUsernameAvailability(@RequestParam String username){
+        return userService.checkUsernameAvailability(username);
+    }
 
     @DeleteMapping("/user/delete/{userId}")
     public ResponseEntity<Object> deleteUser(@PathVariable Long userId){

@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
         User user = userConverter.dtoToEntity(userDto);
         userRepository.save(user);
 
-        User sameUserButFromDb = userRepository.findByEmail(user.getEmail());
-        if (sameUserButFromDb==null){
+        Optional<User> sameUserButFromDb = userRepository.findByEmail(user.getEmail());
+        if (sameUserButFromDb.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -51,6 +51,18 @@ public class UserServiceImpl implements UserService {
 //
 //    }
 
+
+    @Override
+    public boolean checkEmailAvailability(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return !user.isPresent();
+    }
+
+    @Override
+    public boolean checkUsernameAvailability(String username) {
+        Optional<User> user = userRepository.getUserByUsername(username);
+        return !user.isPresent();
+    }
 
     @Override
     public ResponseEntity<Object> deleteUser(Long id) {
