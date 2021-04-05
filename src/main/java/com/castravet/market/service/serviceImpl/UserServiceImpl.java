@@ -1,9 +1,9 @@
 package com.castravet.market.service.serviceImpl;
 
 import com.castravet.market.dto.UserDto;
-import com.castravet.market.dto.dto_converter.UserConverter;
 import com.castravet.market.model.User;
 import com.castravet.market.repository.UserRepository;
+import com.castravet.market.dto.dto_converter.UserConverter;
 import com.castravet.market.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

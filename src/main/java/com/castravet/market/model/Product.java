@@ -1,5 +1,8 @@
 package com.castravet.market.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,15 +16,26 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@ApiModel(description ="Details about the Product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "the unique id of Product")
     private Long id;
 
+    @ApiModelProperty(notes = "the title of product")
     private String title;
+    @ApiModelProperty(notes = "the description of product")
     private String description;
+    @ApiModelProperty(notes = "the price of product")
     private String price;
 
+    @ApiModelProperty(notes = "how many users liked the product")
+    private Integer likes = 0;
+    @ApiModelProperty(notes = "how many users disliked the product")
+    private Integer unlikes =0;
+
+    @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private Set<User> users= new HashSet<>();
 

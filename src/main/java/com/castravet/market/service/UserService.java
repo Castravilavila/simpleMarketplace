@@ -1,7 +1,7 @@
 package com.castravet.market.service;
 
 import com.castravet.market.dto.UserDto;
-import com.castravet.market.model.User;
+import com.castravet.market.payload.LoginRequest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,11 +13,10 @@ public interface UserService {
 
     ResponseEntity<Object> createUser(UserDto userDto);
 
-//    ResponseEntity<Object> updateUser(UserDto userDto, Long id);
-
     ResponseEntity<Object> deleteUser(Long id);
 
     boolean checkEmailAvailability(String email);
 
     boolean checkUsernameAvailability(String username);
+
 }

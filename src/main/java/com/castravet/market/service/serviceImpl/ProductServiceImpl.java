@@ -1,17 +1,16 @@
 package com.castravet.market.service.serviceImpl;
 
 import com.castravet.market.dto.ProductDto;
-import com.castravet.market.dto.dto_converter.ProductConverter;
 import com.castravet.market.model.Product;
 import com.castravet.market.model.User;
 import com.castravet.market.repository.ProductRepository;
 import com.castravet.market.repository.UserRepository;
+import com.castravet.market.dto.dto_converter.ProductConverter;
 import com.castravet.market.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.lang.Math.toIntExact;
 
@@ -119,6 +117,36 @@ public class ProductServiceImpl implements ProductService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<Object> likeProduct(Long productId, Long userId) {
+        Optional<Product> product = productRepository.findById(productId);
+        Optional<User> user = userRepository.findById(userId);
+
+        if (!checkIfProductIsPresentInLikedOrDislikedOfUser(user.get(),product.get())) {
+            if(!removeLikeAndSave(user.get(),product.get())) {
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        addLikeAndSave(user.get(),product.get());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Object> dislikeProduct(Long productId, Long userId) {
+        Optional<Product> product = productRepository.findById(productId);
+        Optional<User> user = userRepository.findById(userId);
+
+        if (!checkIfProductIsPresentInLikedOrDislikedOfUser(user.get(),product.get())) {
+            if(!removeUnLikeAndSave(user.get(),product.get())) {
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        addDisLikeAndSave(user.get(),product.get());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     public boolean isProductPresentInSet(Product product, Set set){
         return set.contains(product);
     }
@@ -135,4 +163,61 @@ public class ProductServiceImpl implements ProductService {
 
         return new PageImpl<>(pageList, pageRequest, totalElements);
     }
+
+    public boolean checkIfProductIsPresentInLikedOrDislikedOfUser(User user, Product product){
+        if (user.getLikedProducts().contains(product) || user.getDislikedProducts().contains(product)){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean addLikeAndSave(User user, Product product){
+        if (product.getLikes()<0){
+            return false;
+
+        }
+        user.getLikedProducts().add(product);
+        userRepository.save(user);
+
+        product.setLikes(product.getLikes()+1);
+        productRepository.save(product);
+        return true;
+    }
+    private boolean addDisLikeAndSave(User user, Product product){
+        if (product.getUnlikes()<0){
+            return false;
+
+        }
+        user.getDislikedProducts().add(product);
+        userRepository.save(user);
+
+        product.setUnlikes(product.getUnlikes()+1);
+        productRepository.save(product);
+        return true;
+    }
+    private boolean removeLikeAndSave(User user, Product product){
+        if (product.getLikes()<0){
+            return false;
+
+        }
+        product.setLikes(product.getLikes()-1);
+        productRepository.save(product);
+
+        user.getLikedProducts().remove(product);
+        userRepository.save(user);
+        return true;
+    }
+    private boolean removeUnLikeAndSave(User user, Product product){
+        if (product.getUnlikes()<=0){
+            return false;
+
+        }
+        product.setUnlikes(product.getUnlikes()-1);
+        productRepository.save(product);
+
+        user.getDislikedProducts().remove(product);
+        userRepository.save(user);
+        return true;
+    }
+
 }
