@@ -50,4 +50,4 @@ Add it to the postman headers like this:
 KEY: authorization     
 VALUE: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE3NjI3MDI0LCJleHAiOjE2MTc2NDg2MjR9.F8itYvnUpYDSE5zeBcWhEbD9US7gpokdhTZyQ6fDwV5eZOXrN7ElCCWiEi-Yz7vWtOntswF9aRR1dBHPph8Rgg
 ` 
-
+Now you can use any api from `http://localhost:8080/api/`
