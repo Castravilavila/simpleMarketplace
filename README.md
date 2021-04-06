@@ -2,15 +2,24 @@
 
 Simple Api for market that contains users and Products.
 
-To be able to run this program you should have a postgresql database and a public schema.
+-----------------------------------------------------------------------------------------------------
+`http://localhost:8080/swagger-ui.html` -->Swagger api documentation
 
-You should add 2 rows in the Role table:
+To be able to run this program you should: 
+1. Have a postgresql database and a public schema.
+
+2. Run the MarketAppliation
+
+3. You should add 2 rows in the Role table:
 ROLE_USER and ROLE_ADMIN
 
-After that you can run the program.
+4.In application.properties change `spring.jpa.hibernate.ddl-auto=create-drop`
+to `spring.jpa.hibernate.ddl-auto=update` so the fields you created to not be deleted
 
+
+Register And Authenticate
 -----------------------------------------------------------------------------
-To be able to use the program you should authenticate:
+To be able to use the program after that you should authenticate:
 
 -In postman do a POST request to: http://localhost:8080/api/auth/signup
 
@@ -41,6 +50,4 @@ Add it to the postman headers like this:
 KEY: authorization     
 VALUE: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE3NjI3MDI0LCJleHAiOjE2MTc2NDg2MjR9.F8itYvnUpYDSE5zeBcWhEbD9US7gpokdhTZyQ6fDwV5eZOXrN7ElCCWiEi-Yz7vWtOntswF9aRR1dBHPph8Rgg
 ` 
-
-`http://localhost:8080/v2/api-docs` --> for Accessing api documentation
 

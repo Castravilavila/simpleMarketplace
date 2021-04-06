@@ -2,12 +2,10 @@ package com.castravet.market.controller;
 
 
 import com.castravet.market.dto.ProductDto;
-import com.castravet.market.model.User;
 import com.castravet.market.repository.ProductRepository;
 import com.castravet.market.security.CurrentUser;
 import com.castravet.market.security.UserPrincipal;
 import com.castravet.market.service.ProductService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -18,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
