@@ -14,7 +14,7 @@ To be able to run this program you should:
 ROLE_USER and ROLE_ADMIN
 
 4.In application.properties change `spring.jpa.hibernate.ddl-auto=create-drop`
-to `spring.jpa.hibernate.ddl-auto=update` so the fields you created to not be deleted
+to `spring.jpa.hibernate.ddl-auto=update` **so the fields you created to not be deleted**
 
 
 Register And Authenticate

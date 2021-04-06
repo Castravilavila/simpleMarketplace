@@ -28,9 +28,7 @@ public class AuthController {
     @PostMapping("/signin")
     @ApiOperation(value="authenticate existing user with username or email and password",
             response = ResponseEntity.class)
-    @ApiResponses(
-            value = {
-            @ApiResponse(code = 200, message = "SUCCES",response = User.class)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "SUCCES",response = User.class)})
     public ResponseEntity<?> authenticateUser(@ApiParam(value="Login request object that contains" +
             "2 fields: emailOrUsername and password",required = true)
                                               @RequestBody LoginRequest loginRequest){
@@ -41,9 +39,7 @@ public class AuthController {
     @PostMapping("/signup")
     @ApiOperation(value="register inexisting user",
             response = ResponseEntity.class)
-    @ApiResponses(
-            value = {
-            @ApiResponse(code = 200, message = "SUCCES",response = User.class)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "SUCCES",response = User.class)})
     public ResponseEntity<?> registerUser(@ApiParam(value="User body with username, password and email",required = true)
                                           @RequestBody User user){
         return userService.registerUser(user);
