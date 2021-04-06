@@ -10,13 +10,6 @@ To be able to run this program you should:
 
 2. Run the MarketAppliation
 
-3. You should add 2 rows in the Role table:
-ROLE_USER and ROLE_ADMIN
-
-4.In application.properties change `spring.jpa.hibernate.ddl-auto=create-drop`
-to `spring.jpa.hibernate.ddl-auto=update` **so the fields you created to not be deleted**
-
-
 Register And Authenticate
 -----------------------------------------------------------------------------
 To be able to use the program after that you should authenticate:

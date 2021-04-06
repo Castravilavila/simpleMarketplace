@@ -46,12 +46,6 @@ public class UserServiceImpl implements UserService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @Override
-//    public ResponseEntity<Object> updateUser(UserDto userDto, Long id) {
-//
-//    }
-
-
     @Override
     public boolean checkEmailAvailability(String email) {
         Optional<User> user = userRepository.findByEmail(email);
